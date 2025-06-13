@@ -1,17 +1,21 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import org.example.config.AppConfig;
+import org.example.service.OrderService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext; // 添加必要的导入
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+public class Main {
+    public static void main(String[] args) { // 移除错误的泛型声明
+        // 创建 Spring 应用上下文
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        // 获取 OrderService Bean（修正方法调用）
+        OrderService orderService = context.getBean(OrderService.class); // 使用 getBean 方法
+
+        // 调用业务方法
+        orderService.createOrder();
+
+        // 关闭上下文
+        context.close();
     }
 }
