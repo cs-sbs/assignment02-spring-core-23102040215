@@ -1,20 +1,19 @@
 package org.example.service;
 
-import org.example.dao.OrderDao;
+import org.example.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
-    private final OrderDao orderDao;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public OrderService(OrderDao orderDao) {
-        this.orderDao = orderDao;
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
-
-    public void createOrder() {
-        System.out.println("Creating a new order...");
-        orderDao.saveOrder();
+    public void createOrder(){
+        System.out.println("正在处理订单业务逻辑...");
+        orderRepository.saveOrder();
     }
 }
